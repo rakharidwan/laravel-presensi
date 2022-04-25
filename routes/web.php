@@ -31,7 +31,7 @@ Route::patch('/update-profile/{id}', [App\Http\Controllers\HomeController::class
 
 Route::get('/jabatan', [App\Http\Controllers\JabatanController::class, 'index'])->middleware('auth');
 Route::post('/jabatan/tambah', [App\Http\Controllers\JabatanController::class, 'store'])->middleware('auth');
-Route::get('/jabatan/hapus/{id}', [App\Http\Controllers\JabatanController::class, 'destroy'])->middleware('auth');
+Route::delete('/jabatan/hapus/{id}', [App\Http\Controllers\JabatanController::class, 'destroy'])->middleware('auth');
 Route::get('/jabatan/ubah/{id}', [App\Http\Controllers\JabatanController::class, 'edit'])->middleware('auth');
 Route::patch('/jabatan/perbarui/{id}', [App\Http\Controllers\JabatanController::class, 'update'])->middleware('auth');
 
@@ -39,7 +39,7 @@ Route::get('/karyawan', [App\Http\Controllers\KaryawanController::class, 'index'
 Route::post('/karyawan/tambah', [App\Http\Controllers\KaryawanController::class, 'store'])->middleware('auth');
 Route::get('/karyawan/edit/{id}', [App\Http\Controllers\KaryawanController::class, 'edit'])->middleware('auth');
 Route::patch('/karyawan/perbarui/{id}', [App\Http\Controllers\KaryawanController::class, 'update'])->middleware('auth');
-Route::get('/karyawan/hapus/{id}', [App\Http\Controllers\KaryawanController::class, 'destroy'])->middleware('auth');
+Route::delete('/karyawan/hapus/{id}', [App\Http\Controllers\KaryawanController::class, 'destroy'])->middleware('auth');
 
 Route::get('/absensi', [App\Http\Controllers\AbsentDataController::class, 'index'])->middleware('auth');
 Route::get('/test', [App\Http\Controllers\AbsentDataController::class, 'test'])->middleware('auth');

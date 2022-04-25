@@ -18,7 +18,7 @@
           <td>{{ $karyawan->entitas }}</td>
           <td>{{ $karyawan->nama }}</td>
           <td>{{ $karyawan->jabatan->jabatan }}</td>
-          <td>{{ date('d/m/Y', strtotime($karyawan->created_at)); }}</td>
+          <td>{{ date('d/m/Y', strtotime($a->created_at)); }}</td>
           @endforeach
           <td>{{ $a->jam_masuk }}</td>
           <td>{{ $a->jam_keluar }}</td>

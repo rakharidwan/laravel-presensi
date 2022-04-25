@@ -42,11 +42,12 @@ class AbsentController extends Controller
         if ($validated->fails()) {
             return response()->json(['status' => 0,'error'=>$validated->errors(),'alert' => 'danger','message' => 'Harap Selfie Terlebih Dahulu']);
         }
+
         $karyawan = Karyawan::where('nik',$request->nik)->first();
         $tanggal = Carbon::now()->format('Y-m-d');
         $absensi = Absensi::where('id',$karyawan->id)->whereDate('created_at',$tanggal)->get();
         if ($absensi->count() >= 1) {
-            return response()->json(['status' => 0,'alert' => 'primary','message' => 'Anda Sudah Melakukan Absen Hari Ini']);
+            return response()->json(['status' => 0,'alert' => 'primary','message' => 'Anda Sudah Melakukan Absen Hari Ini pada jam'.$absensi->created_at]);
         }
 
         $waktu_sekarang = Carbon::now()->format('dmY');

@@ -28,7 +28,7 @@ class AbsentDataController extends Controller
             $waktu = $waktu_sekarang;
         }
 
-        $absensi = Absensi::with(['karyawan'])->whereDate('created_at',$waktu_sekarang)->get();
+        $absensi = Absensi::with(['karyawan'])->whereDate('created_at',$waktu_sekarang)->orderBy('created_at','DESC')->get();
         
         $not_yet_absent = Karyawan::whereNotIn('id',Absensi::with(['karyawan'])->whereDate('created_at',$waktu_sekarang)->select(['id_karyawan']))->get();
 
