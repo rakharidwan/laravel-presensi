@@ -30,19 +30,21 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
+    {      
+        $waktu_sekarang = Carbon::now()->format('Y-m-d');
+        $jumlah_absensi = Absensi::whereDate('created_at',$waktu_sekarang)->count();
         $jumlah_karyawan = Karyawan::count();
-        return view('home',['jumlah_karyawan' => $jumlah_karyawan]);
+        return view('home',['jumlah_karyawan' => $jumlah_karyawan,'jumlah_absensi' => $jumlah_absensi]);
     }
 
     public function absent()
     {
         
         $waktu_sekarang = Carbon::now()->format('Y-m-d');
-        $absent = Absensi::with(['karyawan'])->orderBy('created_at','desc')->whereDate('created_at',$waktu_sekarang)->get();
-        $not_yet_absent = Karyawan::whereNotIn('id',function($query) {
-            $query->select('id_karyawan')->from('absensis');
-         })->count();
+        $absent = Absensi::with(['karyawan'])->orderBy('created_at','desc')->whereDate('created_at',$waktu_sekarang)->take(5)->get();
+
+         $not_yet_absent = Karyawan::whereNotIn('id',Absensi::with(['karyawan'])->whereDate('created_at',$waktu_sekarang)->select(['id_karyawan']))->count();
+
         $absent_count = Absensi::whereDate('created_at',$waktu_sekarang)->count();
 
         return response()->json(['absent' => $absent,'absent_count' => $absent_count,'not_yet_absent' => $not_yet_absent]);

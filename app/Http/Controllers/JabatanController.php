@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Jabatan;
+use Illuminate\Support\Facades\Session;
 use App\DataTables\JabatansDataTable;
 use Intervention\Image\ImageManager as Image;
 
@@ -53,6 +54,8 @@ class JabatanController extends Controller
         $jabatan = Jabatan::create([
             'jabatan' => $request->jabatan
         ]);
+
+        Session::flash('success', 'Data Jabatan Berhasil Ditambahkan'); 
 
         return response()->json(['status' => 1]);
     }
@@ -104,6 +107,8 @@ class JabatanController extends Controller
             'jabatan' => $request->jabatan
         ]);
 
+        Session::flash('success', 'Data Jabatan Berhasil Diubah'); 
+
         return response()->json(['status' => 1]);
     }
 
@@ -118,6 +123,8 @@ class JabatanController extends Controller
         //
         $jabatan = Jabatan::find($id);
         $jabatan->delete();
+
+        Session::flash('danger', 'Data Jabatan Berhasil Dihapus'); 
 
         return redirect()->back();
     }

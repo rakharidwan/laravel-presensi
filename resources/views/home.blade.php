@@ -70,7 +70,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header border-0 pb-0">
-            <h3 class="fs-20 mb-0 text-black">100 karyawan telah melakukan presensi hari ini</h3>
+            <h3 class="fs-20 mb-0 text-black">{{ $jumlah_absensi }} karyawan telah melakukan presensi hari ini</h3>
           </div>
           <div class="card-body">
             <div class="table-responsive">

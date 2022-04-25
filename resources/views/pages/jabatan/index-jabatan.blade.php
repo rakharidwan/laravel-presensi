@@ -15,6 +15,19 @@
       </div>
     {{-- End breadcrumb --}}
 
+      {{-- Start alert message --}}
+      @foreach(['success','danger'] as $msg)
+      @if ($message = Session::has($msg))
+      <div class="mt-2">
+        <div class="alert alert-{{$msg}} alert-dismissible fade show shadow-none" role="alert">
+          {{ Session::get($msg) }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+      @endif
+    @endforeach
+      {{-- End alert message --}}
+
     {{-- Start card --}}
       <div class="row">
         <div class="col-12">

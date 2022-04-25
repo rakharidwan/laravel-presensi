@@ -169,7 +169,7 @@ class KaryawanController extends Controller
         $karyawan = Karyawan::with('jabatan')->where('id',$id)->first();
         $karyawan->delete();
         Storage::disk('public')->delete($karyawan->foto);
-        Session::flash('success', 'Data Karyawan Berhasil Diperbarui');
+        Session::flash('danger', 'Data Karyawan Berhasil Dihapus');
         
         return redirect()->back();
 

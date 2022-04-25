@@ -85,7 +85,9 @@
                           <img src="{{ asset('storage/' . $absen->foto) }}" onclick="perbesarUkuran(event)" alt="Foto selfie">
                         </div>
                       </td>
-                      <td>{{ $absen->foto_pulang }}</td>
+                      <td><div class="foto-presensi">
+                        <img src="{{ asset('storage/' . $absen->foto_pulang) }}" onclick="perbesarUkuran(event)" alt="Foto selfie">
+                      </div></td>
                       <td>{{ $absen->pesan }}</td>
                       <td></td>
                     </tr>
