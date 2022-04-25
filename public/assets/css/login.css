@@ -1,0 +1,22 @@
+.login {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+}
+
+.container {
+    margin: auto;
+}
+
+.card-title {
+    margin: auto;
+}
+
+.form-control:focus {
+    border-color: #369dc9;
+    box-shadow: 0 0 0 0.2rem rgba(35, 180, 206, 0.25);
+}
+
+.btn-submit {
+    width: 100%;
+}
