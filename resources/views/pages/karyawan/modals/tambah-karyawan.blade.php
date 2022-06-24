@@ -8,6 +8,7 @@
       </div>
       <form action="{{ url('/karyawan/tambah') }}" method="POST" id="karyawanCreateForm" enctype="multipart/form-data">
         @csrf
+        
         <div class="modal-body">
           <div class="row">
             <div class="col-sm-6">

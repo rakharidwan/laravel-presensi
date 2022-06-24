@@ -44,6 +44,7 @@ Route::delete('/karyawan/hapus/{id}', [App\Http\Controllers\KaryawanController::
 Route::get('/absensi', [App\Http\Controllers\AbsentDataController::class, 'index'])->middleware('auth');
 Route::get('/test', [App\Http\Controllers\AbsentDataController::class, 'test'])->middleware('auth');
 Route::get('/absensi/image/{id}', [App\Http\Controllers\AbsentDataController::class, 'showImage'])->middleware('auth');
+Route::patch('/absensi/ganti-status/{id}', [App\Http\Controllers\AbsentDataController::class, 'changeStatus'])->middleware('auth');
 Route::patch('/absensi/absent-manual/{id}/{date}', [App\Http\Controllers\AbsentDataController::class, 'absentManual'])->middleware('auth');
 
 Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index'])->middleware('auth');

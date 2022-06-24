@@ -77,8 +77,10 @@
                       @endif
                       @if ($absen->keterangan == 'TELAT')
                         <td><span class="badge badge-pill badge-danger">{{ $absen->keterangan }} {{ floor($absen->keterlambatan / 60) }} jam {{ $absen->keterlambatan % 60 }} menit</span></td>
-                      @else
+                      @elseif($absen->keterangan == 'HADIR')
                         <td><span class="badge badge-pill badge-primary">{{ $absen->keterangan }} {{ $absen->keterlambatan }}</span></td>
+                      @else
+                        <td><span class="badge badge-pill badge-primary">{{ $absen->keterangan }}</span></td>
                       @endif
                       <td>
                         <div class="foto-presensi">
@@ -89,7 +91,28 @@
                         <img src="{{ asset('storage/' . $absen->foto_pulang) }}" onclick="perbesarUkuran(event)" alt="Foto selfie">
                       </div></td>
                       <td>{{ $absen->pesan }}</td>
-                      <td></td>
+                      <td>
+                        @if($absen->status_ubah == 0)
+                        <div class="basic-dropdown">
+                          <div class="dropdown">
+                            <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown">
+                              Tindakan
+                            </button>
+                            <div class="dropdown-menu">
+                              <form action="{{ url('/absensi/ganti-status/'.$absen->id) }}" method="POST">
+                                @csrf
+                                @method('patch')
+                                <button class="dropdown-item" type="submit" value="HADIR" name="action"><i class="bi bi-check-all text-primary"></i> Masuk</button>
+                                <button class="dropdown-item" type="submit" value="IZIN" name="action"><i class="bi bi-check2 text-info"></i> Izin</button>
+                                <button class="dropdown-item" type="submit" value="SAKIT" name="action"><i class="bi bi-check2 text-info"></i> Sakit</button>
+                                <button class="dropdown-item" type="submit" value="LIBUR" name="action"><i class="bi bi-check2 text-info"></i> Libur</button>
+                                <button class="dropdown-item" type="submit" value="CUTI" name="action"><i class="bi bi-check2 text-info"></i> Cuti</button>
+                                <button class="dropdown-item" type="submit" value="TANPA KETERANGAN" name="action"><i class="bi bi-x-lg text-danger"></i> Tanpa Keterangan</button>
+                              </form>
+                            </div>
+                          </div>
+                        </td>
+                        @endif
                     </tr>
                     @endforeach
                     @forelse($not_yet_absent as $nya)

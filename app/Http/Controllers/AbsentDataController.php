@@ -28,9 +28,9 @@ class AbsentDataController extends Controller
             $waktu = $waktu_sekarang;
         }
 
-        $absensi = Absensi::with(['karyawan'])->whereDate('created_at',$waktu_sekarang)->orderBy('created_at','DESC')->get();
+        $absensi = Absensi::with(['karyawan'])->whereDate('created_at',$waktu_sekarang)->orderBy('created_at','DESC')->lazy();
         
-        $not_yet_absent = Karyawan::whereNotIn('id',Absensi::with(['karyawan'])->whereDate('created_at',$waktu_sekarang)->select(['id_karyawan']))->get();
+        $not_yet_absent = Karyawan::whereNotIn('id',Absensi::with(['karyawan'])->whereDate('created_at',$waktu_sekarang)->select(['id_karyawan']))->lazy();
 
          return view('pages.absensi.index-absensi',['absensi' => $absensi,'waktu' => $waktu,'not_yet_absent' => $not_yet_absent]);
     }
@@ -93,9 +93,23 @@ class AbsentDataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function changeStatus(Request $request, $id)
     {
         //
+        $absen = Absensi::where('id',$id)->first();
+
+        if ($absen->status_ubah == 1) {
+            Session::flash('danger', 'Data Absensi Hanya Bisa Diperbarui sekali');
+            return redirect()->back();
+        }
+
+        $perbarui_absen = Absensi::where('id',$id)->update([
+            'keterangan' => $request->action,
+            'status_ubah' => 1
+        ]);
+
+        Session::flash('success', 'Data Absensi Berhasil Diperbarui');
+        return redirect()->back();
     }
 
     /**

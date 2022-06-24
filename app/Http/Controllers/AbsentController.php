@@ -57,7 +57,7 @@ class AbsentController extends Controller
 
         Storage::disk('public')->put($filename, $binary_data);
         
-
+        
         $jam_masuk = Carbon::parse('08:00:00')->format('H:i:s');
         $jam_masuk_karyawan = Carbon::now()->format('H:i:s');
         $terlambat = null;

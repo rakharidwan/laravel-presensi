@@ -18,9 +18,10 @@ class CreateAbsensisTable extends Migration
             $table->foreignId('id_karyawan')->references('id')->on('karyawans')->onDelete('cascade');
             $table->time('jam_masuk', $precision = 0)->nullable();
             $table->string('jam_keluar')->nullable();
-            $table->enum('keterangan',['HADIR','TELAT','TANPA KETERANGAN','IZIN','SAKIT']);
+            $table->enum('keterangan',['HADIR','TELAT','TANPA KETERANGAN','IZIN','SAKIT','CUTI','LIBUR']);
             $table->text('pesan')->nullable();
             $table->text('foto')->nullable();
+            $table->text('status_ubah')->default(0);
             $table->text('foto_pulang')->nullable();
             $table->string('keterlambatan')->nullable();
 
